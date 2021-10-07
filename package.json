@@ -18,5 +18,8 @@
   "homepage": "https://github.com/tygrski/role-player-game#readme",
   "devDependencies": {
     "jest": "^27.2.4"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
   }
 }
