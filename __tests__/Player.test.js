@@ -7,12 +7,12 @@ console.log(new Potion);
 const Player = require('../lib/Player');
 const { createTestScheduler } = require('@jest/core');
 
-// test('creates a health potion object', () => {
-//   const potion = new Potion('health');
+test('creates a health potion object', () => {
+  const potion = new Potion('health');
 
-//   expect(potion.name).toBe('health');
-//   expect(potion.value).toEqual(expect.any(Number));
-// });
+  expect(potion.name).toBe('health');
+  expect(potion.value).toEqual(expect.any(Number));
+});
 
 test('creates a player object', () =>{
   const player = new Player('Dave');
@@ -74,6 +74,24 @@ test('subtracts from players health', () => {
   player.reduceHealth(99999);
 
   expect(player.health).toBe(0);
+});
+
+test('gets players attack value', () => {
+  const player = new Player('Dave');
+  player.strength = 10;
+
+  expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
+  expect(player.getAttackValue()).toBeLessThanOrEqual(15);
+});
+
+test('uses a potion from inventory', () => {
+  const player = new Player('Dave');
+  player.inventory = [new Potion(), new Potion(), new Potion()];
+  const oldCount = player.inventory.length;
+
+  player.usePotion(1);
+
+  expect(player.inventory.length).toBeLessThan(oldCount);
 });
 
 createTestScheduler()
